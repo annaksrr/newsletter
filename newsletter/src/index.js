@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import Popup from "./Popup";
 import Backend from "./Backend";
 import NewWindow from 'react-new-window';

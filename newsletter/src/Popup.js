@@ -1,6 +1,5 @@
 import React from 'react';
-import Popout from 'react-popout';
-import ReactDOM from "react-dom";
+import './App.css';
 
 const Popup = props => {
     return (
@@ -15,4 +14,3 @@ const Popup = props => {
 
 export default Popup;
 
-//ReactDOM.render(<Data />, document.getElementById('root'));

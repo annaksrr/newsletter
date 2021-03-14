@@ -1,5 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './table.css';
+import styles from './index.module.css';
+import Popup from './Popup';
+
 
 export default class Backend extends React.Component {
     constructor(props) {
@@ -7,6 +10,7 @@ export default class Backend extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
+            isOpen: false,
             items: []
         };
     }
@@ -44,6 +48,19 @@ export default class Backend extends React.Component {
         console.log('clicked');
     }
 
+    editContent = (e) =>{
+        this.setState({isOpen: true});
+    }
+
+    closeWindow = (e) =>{
+        e.preventDefault();
+        this.setState({isOpen: false});
+    }
+
+    deleteContent(){
+
+    }
+
     render() {
         const { error, isLoaded, subscribers } = this.state;
         if (error) {
@@ -64,12 +81,32 @@ export default class Backend extends React.Component {
                                 <td>{subscriber.emailAddress}</td>
                                 <td>{subscriber.state}</td>
                                 <td>{subscriber.id}</td>
-                                <td><button>:</button></td>
+                                <td>
+                                    <div className={styles.dropdown}>
+                                        <button className={styles.dropbtn}>:</button>
+                                        <div className={styles.dropdownContent}>
+                                            <a onClick={this.editContent}>Edit</a>
+                                            <a onClick={this.deleteContent}>Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+
                             </tr>
                         ))}
                         </tbody>
                     </table>
+                    <div>
+                        {this.state.isOpen && <Popup
+                            content={<>
+                                <input
+                                type='text'
+                                name='username'
 
+                                />
+                            </>}
+                            handleClose={this.closeWindow}
+                        />}
+                    </div>
                 </div>
             );
         }
